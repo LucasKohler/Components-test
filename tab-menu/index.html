@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="style.css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="tab-menu">
+			<div class="tabs">
+				<div class="tab selected" id="create">Cadastro da Turma</div>
+				<div class="tab not-selected" id="list">Selecionar Alunos</div>
+			</div>
+			<div class="content">
+				<h1>Cadastro da turma</h1>
+
+				<div class="row">
+					<div class="col-25"><label for="code">Código</label></div>
+					<div class="col-75"><input type="text" id="code" /></div>
+				</div>
+
+				<div class="row">
+					<div class="col-25"><label for="discipline">Disciplinas</label></div>
+					<div class="col-75">
+						<select name="discipline" id="discipline">
+							<option value="disciplines">Lista de discplinas</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25"><label for="teacher">Professores</label></div>
+					<div class="col-75">
+						<select name="teacher" id="teacher">
+							<option value="teacher">Lista de professores</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25"><label for="observation">Observação</label></div>
+					<div class="col-75">
+						<textarea
+							name="observation"
+							id="observation"
+							cols="30"
+							rows="10"
+							placeholder="Escreva algo.."
+						></textarea>
+					</div>
+				</div>
+
+				<div class="row button">
+					<button class="save">Salvar</button>
+				</div>
+			</div>
+
+			<div class="content">
+				<h1>Teste de Aba</h1>
+			</div>
+		</div>
+	</body>
+	<script src="./script.js"></script>
+</html>

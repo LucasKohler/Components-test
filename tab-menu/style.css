@@ -80,6 +80,10 @@ body {
 	margin-top: 6px;
 }
 
+textarea {
+	resize: none;
+}
+
 input[type='text'],
 select,
 textarea {

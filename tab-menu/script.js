@@ -1,8 +1,8 @@
-var tabs = document.getElementsByClassName('tab');
-var content = document.getElementsByClassName('content');
+const tabs = document.getElementsByClassName('tab');
+const content = document.getElementsByClassName('content');
 
 function tabStyle(tab) {
-	let selected = document.getElementsByClassName('selected');
+	const selected = document.getElementsByClassName('selected');
 	for (let i = 0; i < selected.length; i++) {
 		selected[i].classList.add('not-selected');
 		selected[i].classList.remove('selected');

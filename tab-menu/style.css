@@ -2,6 +2,8 @@
 	--main-color: #237cf4;
 	--secundary-color: #e9f0fa;
 	--auxiliar-color: #5c9df4;
+	--body-bg-color: #e8ebef;
+	--selected-active-color: #95bdf2;
 }
 
 * {
@@ -16,7 +18,7 @@ html {
 }
 
 body {
-	background-color: #e8ebef;
+	background-color: var(--body-bg-color);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -69,6 +71,10 @@ body {
 	background-color: var(--auxiliar-color);
 }
 
+.tab.selected:active {
+	background-color: var(--selected-active-color);
+}
+
 .content {
 	display: none;
 	flex-direction: column;
@@ -76,17 +82,22 @@ body {
 
 .row {
 	display: flex;
+	justify-content: space-between;
+}
+
+.row.button {
+	justify-content: flex-end;
 }
 
 .col-25 {
 	margin-left: 2%;
-	width: 20%;
-	margin-top: 6px;
+	margin-top: 1vh;
 }
 
 .col-75 {
-	width: 75%;
-	margin-top: 6px;
+	flex-basis: 75%;
+	margin-top: 1vh;
+	margin-right: 3%;
 }
 
 textarea {
@@ -102,11 +113,6 @@ textarea {
 	border-radius: 4px;
 	margin: 0, 0, 0, 0;
 	background-color: var(--secundary-color);
-}
-
-input[type='text'],
-select,
-textarea {
 	outline: none !important;
 	border: 1.5px solid var(--main-color);
 	box-shadow: 0 0 2.5px var(--secundary-color);
@@ -122,10 +128,6 @@ h1 {
 	font-weight: 500;
 }
 
-.row.button {
-	justify-content: flex-end;
-}
-
 .save {
 	background-color: var(--main-color);
 	color: white;
@@ -134,7 +136,7 @@ h1 {
 	border-radius: 4px;
 	cursor: pointer;
 	margin-right: 3%;
-	margin-top: 0.5%;
+	margin-top: 1vh;
 	outline: none;
 	transition: background 0.1s;
 }

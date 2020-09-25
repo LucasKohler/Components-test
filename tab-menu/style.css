@@ -1,6 +1,7 @@
 :root {
 	--main-color: #237cf4;
 	--secundary-color: #e9f0fa;
+	--auxiliar-color: #5c9df4;
 }
 
 * {
@@ -42,8 +43,20 @@ body {
 	padding: 5px 30px;
 	color: var(--main-color);
 	font-size: 100%;
-	transition: background 0.3s ease;
-	align-items: vertical;
+	transition: background 0.2s ease;
+	text-align: center;
+	vertical-align: center;
+}
+
+.tab:hover {
+	background-color: var(--secundary-color);
+	border-bottom: 2px solid var(--main-color);
+}
+
+.tab:active {
+	background-color: var(--main-color);
+	border-bottom-color: #fff;
+	color: #fff;
 }
 
 .tab.selected {
@@ -52,15 +65,8 @@ body {
 	color: #fff;
 }
 
-.tab.not-selected:hover {
-	background-color: var(--secundary-color);
-	border-bottom: 2px solid var(--main-color);
-}
-
-.tab.not-selected:active {
-	background-color: var(--main-color);
-	border-bottom-color: #fff;
-	color: #fff;
+.tab.selected:hover {
+	background-color: var(--auxiliar-color);
 }
 
 .content {

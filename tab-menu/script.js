@@ -3,12 +3,8 @@ const content = document.getElementsByClassName('content');
 
 function tabStyle(tab) {
 	const selected = document.getElementsByClassName('selected');
-	for (let i = 0; i < selected.length; i++) {
-		selected[i].classList.add('not-selected');
-		selected[i].classList.remove('selected');
-	}
-	tab.classList.add('selected');
-	tab.classList.remove('not-selected');
+	selected[0].classList.toggle('selected');
+	tab.classList.toggle('selected');
 }
 
 function showContent(index) {

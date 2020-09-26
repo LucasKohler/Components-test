@@ -6,6 +6,13 @@
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+			integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+			crossorigin="anonymous"
+		/>
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
@@ -15,8 +22,6 @@
 			<div class="tabs">
 				<div class="tab selected" id="create">Cadastro da Turma</div>
 				<div class="tab" id="list">Selecionar Alunos</div>
-				<div class="tab" id="edit">Editar Alunos</div>
-				<div class="tab" id="delete">Excluir Alunos</div>
 			</div>
 			<div class="content">
 				<h1>Cadastro da Turma</h1>
@@ -63,13 +68,75 @@
 			</div>
 
 			<div class="content">
-				<h1>Teste de Aba</h1>
-			</div>
-			<div class="content">
-				<h1>Teste de aba 2</h1>
-			</div>
-			<div class="content">
-				<h1>Teste de aba 3</h1>
+				<h1>Selecionar Alunos</h1>
+				<div class="main-container">
+					<div class="container">
+						<div class="row">
+							<div class="col-header"></div>
+							<header>
+								<span>Alunos</span
+								><input
+									type="text"
+									name="search"
+									id="search"
+									placeholder="Filtro"
+								/>
+							</header>
+						</div>
+
+						<div class="container-aux" id="students">
+							<div class="container-row">
+								<div class="col-10">
+									<input
+										type="checkbox"
+										name="studentCheck"
+										id="studentCheck"
+										value="teste"
+									/>
+								</div>
+								<div class="col-90">Teste</div>
+							</div>
+
+							<div class="container-row">
+								<div class="col-10">
+									<input
+										type="checkbox"
+										name="studentCheck"
+										id="studentCheck"
+										value="teste2"
+									/>
+								</div>
+								<div class="col-90">Teste2</div>
+							</div>
+
+							<div class="container-row">
+								<div class="col-10">
+									<input
+										type="checkbox"
+										name="studentCheck"
+										id="studentCheck"
+										value="teste3"
+									/>
+								</div>
+								<div class="col-90">Teste3</div>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button id="to-right">
+							<i class="fas fa-arrow-right fa-4x"></i>
+						</button>
+						<button id="to-left">
+							<i class="fas fa-arrow-left fa-4x"></i>
+						</button>
+					</div>
+
+					<!-- right container-->
+					<div class="container-selected">
+						<header>Alunos Slecionados</header>
+						<div class="container-aux" id="selectedStudents"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

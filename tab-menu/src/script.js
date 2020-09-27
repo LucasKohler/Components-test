@@ -40,7 +40,7 @@ function moveStudent() {
 		selectedStudents.push(json);
 
 		selectedStudentsContainer.innerHTML = htmlStudentList(
-			sortOn(selectedStudents)
+			sortOn(selectedStudents, 'first_name')
 		);
 		eventStudentList();
 

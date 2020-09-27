@@ -4,7 +4,11 @@ const toRight = document.getElementById('to-right');
 const toLeft = document.getElementById('to-left');
 const students = document.getElementById('students');
 const selectedStudentsContainer = document.getElementById('selectedStudents');
+const selectedStudentsList = document.getElementsByClassName('studentList');
 const selectedStudents = [];
+const url = './data.json';
+
+let listOfStudents = [];
 
 //Moving class selected to the new selected tab
 function tabStyle(tab) {
@@ -21,6 +25,7 @@ function showContent(index) {
 	content[index].style.display = 'flex';
 }
 
+//Move student from left to right
 function moveStudent() {
 	const checkboxes = document.querySelectorAll(
 		'input[name="studentCheck"]:checked'
@@ -28,12 +33,34 @@ function moveStudent() {
 	for (let checkbox of checkboxes) {
 		let parentRM = checkbox.parentNode.parentNode;
 		parentRM.remove();
-		let z = document.createElement('div');
-		z.classList.add('studentList');
-		z.innerHTML = checkbox.value;
-		selectedStudentsContainer.appendChild(z);
-		selectedStudents.push(z);
-		z.addEventListener('click', () => addClass(z));
+
+		let str = checkbox.value.split(' ');
+		let preJson = `{"first_name": "${str[0]}", "last_name": "${str[1]}"}`;
+		let json = JSON.parse(preJson);
+		selectedStudents.push(json);
+
+		selectedStudentsContainer.innerHTML = htmlStudentList(
+			sortOn(selectedStudents)
+		);
+		eventStudentList();
+
+		for (let student of listOfStudents) {
+			let index = listOfStudents.indexOf(student);
+			if (
+				json.first_name === student.first_name &&
+				json.last_name === student.last_name
+			) {
+				listOfStudents.splice(index, 1);
+			}
+		}
+	}
+}
+
+function eventStudentList() {
+	for (let i = 0; i < selectedStudentsList.length; i++) {
+		selectedStudentsList[i].addEventListener('click', () =>
+			addClass(selectedStudentsList[i])
+		);
 	}
 }
 
@@ -41,27 +68,80 @@ function moveStudent() {
 function returnStudent() {
 	const checkedStudents = document.querySelectorAll('.studentList.selected');
 	for (let student of checkedStudents) {
-		let z = `
-		<div class="container-row">
+		let str = student.textContent.split(' ');
+		let preJson = `{"first_name": "${str[0]}", "last_name": "${str[1]}"}`;
+		let json = JSON.parse(preJson);
+		student.remove();
+		listOfStudents.push(json);
+
+		for (let student of selectedStudents) {
+			let index = selectedStudents.indexOf(student);
+			if (
+				json.first_name === student.first_name &&
+				json.last_name === student.last_name
+			) {
+				selectedStudents.splice(index, 1);
+			}
+		}
+
+		students.innerHTML = reduceStudents(sortOn(listOfStudents, 'first_name'));
+	}
+}
+
+// Order array alphabetically
+function sortOn(arr, prop) {
+	arr.sort(function (a, b) {
+		if (a[prop] < b[prop]) {
+			return -1;
+		} else if (a[prop] > b[prop]) {
+			return 1;
+		} else {
+			return 0;
+		}
+	});
+	return arr;
+}
+
+function htmlStudentList(arr) {
+	let aux = arr.reduce(
+		(html, student) =>
+			html +
+			`<div class="studentList">${student.first_name} ${student.last_name}</div>`,
+		''
+	);
+	return aux;
+}
+
+//Return the html of a array
+function reduceStudents(arr) {
+	let aux = arr.reduce(
+		(html, student) =>
+			html +
+			`<div class="container-row">
 			<div class="col-10">
 				<input
 					type="checkbox"
 					name="studentCheck"
 					id="studentCheck"
-					value="${student.textContent}"
+					value="${student.first_name} ${student.last_name}"
 				/>
 			</div>
-			<div class="col-90">${student.textContent}</div>
-		</div>
-		`;
-		student.remove();
-		students.innerHTML += z;
-	}
+			<div class="col-90">${student.first_name} ${student.last_name}</div>
+		</div>`,
+		''
+	);
+	return aux;
 }
 
 function addClass(student) {
 	student.classList.toggle('selected');
 }
+
+content[0].style.display = 'flex';
+
+toRight.addEventListener('click', () => moveStudent());
+
+toLeft.addEventListener('click', () => returnStudent());
 
 //attaches an event handler to all tabs
 for (let i = 0; i < tabs.length; i++) {
@@ -71,8 +151,14 @@ for (let i = 0; i < tabs.length; i++) {
 	});
 }
 
-content[0].style.display = 'flex';
-
-toRight.addEventListener('click', () => moveStudent());
-
-toLeft.addEventListener('click', () => returnStudent());
+fetch(url)
+	.then(resp => resp.json())
+	.then(data => sortOn(data, 'first_name'))
+	.then(data => {
+		listOfStudents = [...data];
+		return data;
+	})
+	.then(data => {
+		const items = reduceStudents(data);
+		students.innerHTML += items;
+	});

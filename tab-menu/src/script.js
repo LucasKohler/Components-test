@@ -4,7 +4,7 @@ const toRight = document.getElementById('to-right');
 const toLeft = document.getElementById('to-left');
 const students = document.getElementById('students');
 const selectedStudentsContainer = document.getElementById('selectedStudents');
-const selectedStudentsList = document.getElementsByClassName('studentList');
+//const selectedStudentsList = document.getElementsByClassName('studentList');
 const selectedStudents = [];
 const url = './data.json';
 
@@ -25,6 +25,32 @@ function showContent(index) {
 	content[index].style.display = 'flex';
 }
 
+content[0].style.display = 'flex';
+
+//attaches an event handler to all tabs
+for (let i = 0; i < tabs.length; i++) {
+	tabs[i].addEventListener('click', () => {
+		tabStyle(tabs[i]);
+		showContent(i);
+	});
+}
+
+//Move student from right to left
+function returnStudent() {
+	const checkedStudents = document.querySelectorAll('.studentList.selected');
+	for (let student of checkedStudents) {
+		let json = valueToJson(student.textContent);
+		student.remove();
+		listOfStudents.push(json);
+		removeStudent(selectedStudents, json);
+		students.innerHTML = reduceLeftStudents(
+			sortOn(listOfStudents, 'first_name')
+		);
+	}
+}
+
+toLeft.addEventListener('click', () => returnStudent());
+
 //Move student from left to right
 function moveStudent() {
 	const checkboxes = document.querySelectorAll(
@@ -33,58 +59,26 @@ function moveStudent() {
 	for (let checkbox of checkboxes) {
 		let parentRM = checkbox.parentNode.parentNode;
 		parentRM.remove();
-
-		let str = checkbox.value.split(' ');
-		let preJson = `{"first_name": "${str[0]}", "last_name": "${str[1]}"}`;
-		let json = JSON.parse(preJson);
+		let json = valueToJson(checkbox.value);
 		selectedStudents.push(json);
-
-		selectedStudentsContainer.innerHTML = htmlStudentList(
+		selectedStudentsContainer.innerHTML = reduceRightStudents(
 			sortOn(selectedStudents, 'first_name')
 		);
-		eventStudentList();
-
-		for (let student of listOfStudents) {
-			let index = listOfStudents.indexOf(student);
-			if (
-				json.first_name === student.first_name &&
-				json.last_name === student.last_name
-			) {
-				listOfStudents.splice(index, 1);
-			}
-		}
+		removeStudent(listOfStudents, json);
 	}
 }
 
-function eventStudentList() {
-	for (let i = 0; i < selectedStudentsList.length; i++) {
-		selectedStudentsList[i].addEventListener('click', () =>
-			addClass(selectedStudentsList[i])
-		);
-	}
-}
+toRight.addEventListener('click', () => moveStudent());
 
-//Move student from right to left
-function returnStudent() {
-	const checkedStudents = document.querySelectorAll('.studentList.selected');
-	for (let student of checkedStudents) {
-		let str = student.textContent.split(' ');
-		let preJson = `{"first_name": "${str[0]}", "last_name": "${str[1]}"}`;
-		let json = JSON.parse(preJson);
-		student.remove();
-		listOfStudents.push(json);
-
-		for (let student of selectedStudents) {
-			let index = selectedStudents.indexOf(student);
-			if (
-				json.first_name === student.first_name &&
-				json.last_name === student.last_name
-			) {
-				selectedStudents.splice(index, 1);
-			}
+function removeStudent(arr, json) {
+	for (let student of arr) {
+		let index = arr.indexOf(student);
+		if (
+			json.first_name === student.first_name &&
+			json.last_name === student.last_name
+		) {
+			arr.splice(index, 1);
 		}
-
-		students.innerHTML = reduceStudents(sortOn(listOfStudents, 'first_name'));
 	}
 }
 
@@ -102,18 +96,18 @@ function sortOn(arr, prop) {
 	return arr;
 }
 
-function htmlStudentList(arr) {
+function reduceRightStudents(arr) {
 	let aux = arr.reduce(
 		(html, student) =>
 			html +
-			`<div class="studentList">${student.first_name} ${student.last_name}</div>`,
+			`<div class="studentList" onClick="addClass(this)">${student.first_name} ${student.last_name}</div>`,
 		''
 	);
 	return aux;
 }
 
 //Return the html of a array
-function reduceStudents(arr) {
+function reduceLeftStudents(arr) {
 	let aux = arr.reduce(
 		(html, student) =>
 			html +
@@ -133,22 +127,14 @@ function reduceStudents(arr) {
 	return aux;
 }
 
-function addClass(student) {
-	student.classList.toggle('selected');
+function valueToJson(value) {
+	let str = value.split(' ');
+	let preJson = `{"first_name": "${str[0]}", "last_name": "${str[1]}"}`;
+	return JSON.parse(preJson);
 }
 
-content[0].style.display = 'flex';
-
-toRight.addEventListener('click', () => moveStudent());
-
-toLeft.addEventListener('click', () => returnStudent());
-
-//attaches an event handler to all tabs
-for (let i = 0; i < tabs.length; i++) {
-	tabs[i].addEventListener('click', () => {
-		tabStyle(tabs[i]);
-		showContent(i);
-	});
+function addClass(student) {
+	student.classList.toggle('selected');
 }
 
 fetch(url)
@@ -159,6 +145,6 @@ fetch(url)
 		return data;
 	})
 	.then(data => {
-		const items = reduceStudents(data);
+		const items = reduceLeftStudents(data);
 		students.innerHTML += items;
 	});

@@ -608,5 +608,12 @@ h1 {
 			margin-right: 0;
 			padding: 3% 3%;
 		}
+
+		.save-2:active {
+			transition: none;
+			background-color: var(--secundary-color);
+			color: var(--main-color);
+			border: 2px solid var(--main-color);
+		}
 	}
 }

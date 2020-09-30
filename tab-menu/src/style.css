@@ -468,6 +468,9 @@ h1 {
 		display: flex;
 		align-items: center;
 		margin: 0;
+		margin-left: 1%;
+		margin-right: 1%;
+		margin-bottom: 0.3%;
 	}
 
 	.fas.fa-arrow-right.fa-4x {

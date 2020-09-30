@@ -335,6 +335,14 @@ h1 {
 		color: #fff;
 		border: none;
 	}
+
+	.buttons button:nth-child(1):hover,
+	.buttons button:nth-child(2):hover {
+		transition: background 0.2s ease;
+		background-color: var(--main-color);
+		color: #fff;
+		border-color: #fff;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -436,20 +444,14 @@ h1 {
 		margin-bottom: 1%;
 	}
 
-	.buttons button:nth-child(1) {
-		margin: 0;
-		height: 100%;
-		width: 50%;
-		border-top-left-radius: 5%;
-		border-bottom-left-radius: 5%;
-	}
-
+	.buttons button:nth-child(1),
 	.buttons button:nth-child(2) {
+		background-color: var(--main-color);
+		color: #fff;
+		border-color: #fff;
 		margin: 0;
 		height: 100%;
 		width: 50%;
-		border-top-right-radius: 5%;
-		border-bottom-right-radius: 5%;
 	}
 
 	.container-selected {

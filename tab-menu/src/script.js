@@ -107,7 +107,7 @@ function reduceRightStudents(arr) {
 	return aux;
 }
 
-//Return the html of a array
+//Return the html of an array
 function reduceLeftStudents(arr) {
 	let aux = arr.reduce(
 		(html, student) =>

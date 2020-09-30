@@ -149,3 +149,56 @@ fetch(url)
 		const items = reduceLeftStudents(data);
 		students.innerHTML += items;
 	});
+
+//media query
+const mainContainer = document.getElementById('main-container');
+const container = document.getElementsByClassName('container');
+const containerSelected = document.getElementsByClassName('container-selected');
+const selectStudentsButton = document.getElementById('selectStudentsButton');
+const buttons = document.querySelectorAll('.buttons button');
+
+function myFunction(windowMedia) {
+	if (windowMedia.matches) {
+		toFirstPage();
+		buttons[0].addEventListener('click', toSecondPage);
+		buttons[1].addEventListener('click', toFirstPage);
+	} else {
+		normalSize();
+		buttons[0].removeEventListener('click', toSecondPage);
+		buttons[1].removeEventListener('click', toFirstPage);
+	}
+}
+
+function toFirstPage() {
+	mainContainer.style.flexDirection = 'column';
+	container[0].style.display = 'flex';
+	buttons[0].style.display = 'block';
+
+	containerSelected[0].style.display = 'none';
+	buttons[1].style.display = 'none';
+	selectStudentsButton.style.display = 'none';
+}
+
+function toSecondPage() {
+	mainContainer.style.flexDirection = 'column-reverse';
+	container[0].style.display = 'none';
+	buttons[0].style.display = 'none';
+
+	containerSelected[0].style.display = 'block';
+	buttons[1].style.display = 'block';
+	selectStudentsButton.style.display = 'block';
+}
+
+function normalSize() {
+	mainContainer.style.flexDirection = 'row';
+	container[0].style.display = 'flex';
+	buttons[0].style.display = 'block';
+
+	containerSelected[0].style.display = 'flex';
+	buttons[1].style.display = 'block';
+	selectStudentsButton.style.display = 'block';
+}
+
+const windowMedia = window.matchMedia('(max-width: 480px)');
+myFunction(windowMedia);
+windowMedia.addEventListener('change', myFunction);

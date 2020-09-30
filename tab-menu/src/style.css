@@ -330,11 +330,11 @@ h1 {
 	background-color: var(--main-color);
 	width: 8%;
 	color: white;
-	padding: 3% 5%;
+	padding: 1% 1%;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	margin-right: 1%;
+	margin-right: 3%;
 	margin-top: 1%;
 	outline: none;
 	transition: background 0.1s;
@@ -533,5 +533,6 @@ h1 {
 		width: 99%;
 		display: none;
 		margin-right: 0;
+		padding: 3% 3%;
 	}
 }

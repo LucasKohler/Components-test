@@ -47,6 +47,9 @@ body {
 	font-size: 100%;
 	transition: background 0.2s ease;
 	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .tab:hover {
@@ -77,7 +80,7 @@ body {
 .content {
 	display: none;
 	flex-direction: column;
-	height: 100%;
+	height: 90%;
 	overflow-y: auto;
 }
 
@@ -167,7 +170,7 @@ h1 {
 
 .main-container {
 	display: flex;
-	height: 68%;
+	height: 70%;
 	width: 100%;
 	justify-content: space-between;
 }
@@ -352,6 +355,19 @@ h1 {
 	color: white;
 }
 
+@media screen and (max-width: 1024px) {
+	.tab-menu {
+		width: 100vw;
+		height: 100vh;
+		border-radius: 0;
+	}
+
+	.save-2 {
+		padding: calc(1% + 6px) calc(1% + 6px);
+		width: 10%;
+	}
+}
+
 @media (hover: none) {
 	.tab:hover {
 		border-bottom: 2px solid #fff;
@@ -368,11 +384,55 @@ h1 {
 	}
 }
 
+@media screen and (max-width: 768px) {
+	.tab-menu {
+		width: 100vw;
+		height: 100vh;
+	}
+
+	.tab {
+		width: 50%;
+	}
+
+	.container-row {
+		height: 10%;
+	}
+
+	.col-header {
+		width: 22.5%;
+	}
+
+	.col-10 {
+		width: 20%;
+	}
+
+	.col-90 {
+		width: 80%;
+	}
+
+	.studentList.selected {
+		height: 10%;
+	}
+
+	.studentList {
+		height: 10%;
+		display: flex;
+		align-items: center;
+		margin: 0;
+		margin-left: 1%;
+		margin-right: 1%;
+		margin-bottom: 0.3%;
+	}
+
+	.save-2 {
+		padding: calc(1% + 5px) calc(1% + 5px);
+		width: 15%;
+}
+
 @media screen and (max-width: 480px) {
 	.tab-menu {
 		width: 100%;
 		height: 100%;
-		border-radius: 0;
 		box-shadow: none;
 	}
 
@@ -442,7 +502,7 @@ h1 {
 	.main-container {
 		display: flex;
 		flex-direction: column;
-		height: 75%;
+		height: 80%;
 	}
 
 	.container {
@@ -452,6 +512,18 @@ h1 {
 
 	.container .row {
 		margin: 0;
+	}
+
+	.col-header {
+		width: 10%;
+	}
+
+	.col-10 {
+		width: 10%;
+	}
+
+	.col-90 {
+		width: 90%;
 	}
 
 	.container {
@@ -468,10 +540,10 @@ h1 {
 	}
 
 	.buttons {
-		flex-direction: row;
+		flex-direction: column;
 		height: 10%;
-		margin-top: 1%;
 		margin-bottom: 1%;
+		margin-top: 2%;
 	}
 
 	.buttons button:nth-child(1) {
@@ -498,6 +570,7 @@ h1 {
 
 	.container-selected {
 		width: 100%;
+		height: 100%;
 		border-radius: 1%;
 		display: none;
 	}

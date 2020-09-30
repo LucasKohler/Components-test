@@ -8,7 +8,7 @@ const selectedStudentsContainer = document.getElementById('selectedStudents');
 const selectedStudents = [];
 const url = './data.json';
 
-let listOfStudents = [];
+let = listOfStudents = [];
 
 //Moving class selected to the new selected tab
 function tabStyle(tab) {
@@ -40,6 +40,7 @@ function returnStudent() {
 	const checkedStudents = document.querySelectorAll('.studentList.selected');
 	for (let student of checkedStudents) {
 		let json = valueToJson(student.textContent);
+		console.log(json);
 		student.remove();
 		listOfStudents.push(json);
 		removeStudent(selectedStudents, json);
